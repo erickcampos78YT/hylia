@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>hylia</h1>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('profile', username=user['name']) }}">Profile</a>
+    </div>
+
+    <div class="customize-container">
+        <form action="{{ url_for('customize') }}" method="POST" enctype="multipart/form-data" class="customize-form">
+            <label for="banner">Change Banner</label>
+            <input type="file" name="banner" id="banner" required>
+
+            <label for="profile_photo">Change Profile Photo</label>
+            <input type="file" name="profile_photo" id="profile_photo" required>
+
+            <button type="submit" class="customize-button">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

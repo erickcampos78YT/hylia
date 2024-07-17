@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user['name'] }}'s Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>hylia</h1>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('profile', username=user['name']) }}">Profile</a>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="{{ url_for('static', filename='data/fotos/' ~ user['photo']) }}" alt="Profile Photo" class="profile-photo">
+            <div class="profile-info">
+                <h2>{{ user['name'] }}</h2>
+                <p>Email: {{ user['email'] }}</p>
+                <p>Idade: {{ user['age'] }}</p>
+            </div>
+        </div>
+        <div>
+            <a href="{{ url_for('customize') }}" class="customize-button">Personalizar Perfil</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hylia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Social Media App</h1>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('profile', username=user['name']) }}">Profile</a>
+    </div>
+
+    <div class="container">
+        <div class="messages" id="messages">
+            {% for message in messages %}
+            <div class="message">
+                <img src="{{ url_for('static', filename='data/fotos/' ~ message.photo) }}" alt="User Photo" class="user-photo">
+                <div class="message-content">
+                    <strong>{{ message.username }}</strong>: {{ message.message }}
+                    {% if message.image %}
+                    <br>
+                    <img src="{{ url_for('static', filename='data/fotos/' ~ message.image) }}" alt="Attached Image" class="attached-image">
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form action="{{ url_for('messages') }}" method="POST" enctype="multipart/form-data" class="message-form">
+            <input type="text" name="message" placeholder="Write your message here..." required>
+            <input type="file" name="image" id="image" style="display: none;">
+            <label for="image" class="attach-button">+</label>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        // Scroll to the bottom of the messages div to keep the input visible
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    </script>
+</body>
+</html>
